@@ -34,7 +34,7 @@ const BasicForm = () => {
     onSubmit,
   });
 
-  console.log(errors);
+ 
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
