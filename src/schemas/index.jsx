@@ -7,6 +7,7 @@ export const basicSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email").required("Required"),
   age: yup.number().positive().integer().required("Required"),  //if negative no. is given yup gives a default error msg
   password: yup
+  //check out formik lib docs for yup where we can further make this better...
     .string()
     .min(6)  // default error msg if password less than 6 characters
     .matches(passwordRules, { message: "Please create a stronger password" })

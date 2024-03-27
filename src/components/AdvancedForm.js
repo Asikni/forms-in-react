@@ -18,12 +18,15 @@ const AdvancedForm = () => {
       validationSchema={advancedSchema}
       onSubmit={onSubmit}
     >
-      {({ isSubmitting }) => (
+      {(
+        { isSubmitting, isValid } // defines a function component that takes isSubmitting as argument
+        //isSubmitting is a boolean value provided by Formik to indicate whether the form is currently being submitted.
+      ) => (
         <Form>
           <CustomInput
             label="Username"
-            name="username"  //attribute for identifying form fields(uniquely identifies form field) and connecting them to form libraries like Formik
-            type="text"   //if we put number here and then try to input text..that will not happen , wont allow
+            name="username" //attribute for identifying form fields(uniquely identifies form field) and connecting them to form libraries like Formik
+            type="text" //if we put number here and then try to input text..that will not happen , wont allow
             placeholder="Enter your username"
           />
           <CustomSelect
@@ -37,9 +40,11 @@ const AdvancedForm = () => {
             <option value="manager">Product Manager</option>
             <option value="other">Other</option>
           </CustomSelect>
-          <CustomCheckbox type="checkbox" name="acceptedTos" />  {/*by ticking it will value true */}
-          
-          <button disabled={isSubmitting} type="submit">
+          <CustomCheckbox type="checkbox" name="acceptedTos" />{" "}
+          {/*by ticking it will value true */}
+          <button disabled={isSubmitting || !isValid } type="submit">  
+          {/*When the form is submitted (e.g., by clicking a submit button), 
+          Formik sets isSubmitting to true before it starts the submission process.  */}
             Submit
           </button>
         </Form>

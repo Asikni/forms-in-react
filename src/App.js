@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BasicForm from "./components/BasicForm";
 import AdvancedForm from "./components/AdvancedForm";
+import Checkbox from "./components/checkBoxForm"
 import "./App.css";
 
 function App() {
@@ -20,8 +21,17 @@ function App() {
         >
           Advanced
         </h3>
+
+        <h3
+          onClick={() => setView("checkbox")}
+          style={{ color: view === "checkbox" ? "#fff" : "" }}
+        >
+          Checkbox
+        </h3>
       </nav>
-      {view === "basic" ? <BasicForm /> : <AdvancedForm />}
+      {view === "basic" ? <BasicForm /> : view === "advanced" ? <AdvancedForm /> : <Checkbox />}
+
+
     </div>
   );
 }
