@@ -2,6 +2,8 @@ import { useState } from "react";
 import BasicForm from "./components/BasicForm";
 import AdvancedForm from "./components/AdvancedForm";
 import Checkbox from "./components/checkBoxForm"
+
+import SearchFilter from "./components/searchFilter"
 import "./App.css";
 
 function App() {
@@ -28,8 +30,14 @@ function App() {
         >
           Checkbox
         </h3>
+        <h3
+          onClick={() => setView("searchfilter")}
+          style={{ color: view === "searchfilter" ? "#fff" : "" }}
+        >
+ Search Filter
+        </h3>
       </nav>
-      {view === "basic" ? <BasicForm /> : view === "advanced" ? <AdvancedForm /> : <Checkbox />}
+      {view === "basic" ? <BasicForm /> : view === "advanced" ? <AdvancedForm /> : view === "checkbox" ? <Checkbox /> : <SearchFilter/>}
 
 
     </div>
