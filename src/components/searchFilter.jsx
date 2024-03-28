@@ -1,25 +1,44 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import "../TagSelector.css"; 
 
-function SearchFilter() {
-  const [isInput, setIsInput] = useState("");
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setIsInput(event.target.value);
+function TagSelector() {
+  const [inputValue, setInputValue] = useState("");
+  const [tags, setTags] = useState([]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputKeyPress = (e) => {
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      setTags([...tags, inputValue.trim()]);
+      setInputValue("");
     }
   };
 
-  useEffect(() => {
-   <div style={{border:"1px solid red"}}>{isInput}</div>
-  }, [isInput]);
+  const handleTagRemove = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
 
   return (
-    <div>
-      <div>Search Filter</div>
-      <div>
-        <input type="text" onKeyDown={handleKeyPress} />
+    <div className="tag-selector">
+      <div className="tag-list">
+        {tags.map((tag, index) => (
+          <div key={index} className="tag">
+            <span>{tag}</span>
+            <button className="crossButton" onClick={() => handleTagRemove(tag)}>&times;</button>
+          </div>
+        ))}
       </div>
+      <input
+        type="text"
+        placeholder="Type and press Enter to add tags"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleInputKeyPress}
+      />
     </div>
   );
 }
 
-export default SearchFilter;
+export default TagSelector;

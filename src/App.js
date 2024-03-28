@@ -3,7 +3,7 @@ import BasicForm from "./components/BasicForm";
 import AdvancedForm from "./components/AdvancedForm";
 import Checkbox from "./components/checkBoxForm"
 
-import SearchFilter from "./components/searchFilter"
+import TagSelector from "./components/searchFilter"
 import "./App.css";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
  Search Filter
         </h3>
       </nav>
-      {view === "basic" ? <BasicForm /> : view === "advanced" ? <AdvancedForm /> : view === "checkbox" ? <Checkbox /> : <SearchFilter/>}
+      {view === "basic" ? <BasicForm /> : view === "advanced" ? <AdvancedForm /> : view === "checkbox" ? <Checkbox /> : <TagSelector/>}
 
 
     </div>
