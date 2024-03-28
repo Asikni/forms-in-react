@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../TagSelector.css"; 
+import "../TagSelector.css";
 
 function TagSelector() {
   const [inputValue, setInputValue] = useState("");
@@ -11,8 +11,11 @@ function TagSelector() {
 
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
-      setTags([...tags, inputValue.trim()]);
+      setTags([...tags, inputValue.trim()]); // used to remove whitespace from both ends of a string.
       setInputValue("");
+    } else if (e.key === "Backspace" && inputValue === "") {
+      // Check if input value is empty before removing the last tag
+      setTags(tags.slice(0, -1)); //creates new array without last element
     }
   };
 
@@ -26,7 +29,12 @@ function TagSelector() {
         {tags.map((tag, index) => (
           <div key={index} className="tag">
             <span>{tag}</span>
-            <button className="crossButton" onClick={() => handleTagRemove(tag)}>&times;</button>
+            <button
+              className="crossButton"
+              onClick={() => handleTagRemove(tag)}
+            >
+              &times;
+            </button>
           </div>
         ))}
       </div>
