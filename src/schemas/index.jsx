@@ -5,11 +5,11 @@ const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
 export const basicSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email").required("Required"),
-  age: yup.number().positive().integer().required("Required"),  //if negative no. is given yup gives a default error msg
+  age: yup.number().positive().integer().required("Required"), //if negative no. is given yup gives a default error msg
   password: yup
-  //check out formik lib docs for yup where we can further make this better...
+    //check out formik lib docs for yup where we can further make this better...
     .string()
-    .min(6)  // default error msg if password less than 6 characters
+    .min(6) // default error msg if password less than 6 characters
     .matches(passwordRules, { message: "Please create a stronger password" })
     .required("Required"),
   confirmPassword: yup
@@ -30,4 +30,14 @@ export const advancedSchema = yup.object().shape({
   acceptedTos: yup
     .boolean()
     .oneOf([true], "Please accept the terms of service"),
+});
+
+export const checkboxSchema = yup.object().shape({
+  ischeckedBlue: yup.boolean().oneOf([true, false]),
+  ischeckedGreen: yup.boolean().oneOf([true, false]),
+});
+
+export const checkSchema = yup.object().shape({
+  checkOne: yup.boolean().oneOf([true, false]),
+  checkTwo: yup.boolean().oneOf([true, false]),
 });

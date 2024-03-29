@@ -4,7 +4,9 @@ import AdvancedForm from "./components/AdvancedForm";
 import Checkbox from "./components/checkBoxForm";
 
 import TagSelector from "./components/searchFilter";
-import TagSelector2 from  "./components/searchFilter2"
+import TagSelector2 from "./components/searchFilter2";
+
+import CheckBoxFormik from "./components/checkboxFormik";
 import "./App.css";
 
 function App() {
@@ -35,13 +37,20 @@ function App() {
           onClick={() => setView("searchfilter")}
           style={{ color: view === "searchfilter" ? "#fff" : "" }}
         >
-          
           Search Filter
         </h3>
         <h3
-            onClick={() => setView("searchfilter2")}
-            style={{ color: view === "searchfilter2" ? "#fff" : "" }}
-          >Search filter 2</h3>
+          onClick={() => setView("searchfilter2")}
+          style={{ color: view === "searchfilter2" ? "#fff" : "" }}
+        >
+          Search filter 2
+        </h3>
+        <h3
+          onClick={() => setView("checkbox-formik")}
+          style={{ color: view === "checkbox-formik" ? "#fff" : "" }}
+        >
+          Checkbox-formik
+        </h3>
       </nav>
       {view === "basic" ? (
         <BasicForm />
@@ -51,7 +60,11 @@ function App() {
         <Checkbox />
       ) : view === "searchfilter" ? (
         <TagSelector />
-      ): <TagSelector2/>}
+      ) : view === "searchfilter2" ? (
+        <TagSelector2 />
+      ) : (
+        <CheckBoxFormik />
+      )}
     </div>
   );
 }

@@ -20,7 +20,7 @@ function TagSelector() {
   };
 
   const handleTagRemove = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
+    setTags(tags.filter((tag) => tag !== tagToRemove)); //get every element in the array and choose if we want to keep that element...
   };
 
   return (

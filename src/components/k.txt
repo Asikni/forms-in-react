@@ -1,0 +1,52 @@
+<Formik
+      initialValues={{
+        ischeckedBlue: false,
+        ischeckedGreen: false
+      }}
+      validationSchema={ checkboxSchema }
+      
+      onSubmit={(values, { setSubmitting }) => {
+        // You can perform form submission actions here
+        console.log(values);
+        setSubmitting(false);
+      }}
+    >
+      {({ values, setFieldValue }) => (
+        <Form style={{ display: "flex" }}>
+          <div className="parent">
+            <div className="checkBoxOne">This is checkbox one</div>
+            <div
+              className="checkBoxOneSelectOne"
+              style={{
+                backgroundColor: values.ischeckedBlue ? "blue" : "transparent",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer"
+              }}
+              onClick={() => {
+                setFieldValue("ischeckedBlue", true);
+                setFieldValue("ischeckedGreen", false);
+              }}
+            ></div>
+          </div>
+          <div className="parent">
+            <div>This is checkbox two</div>
+            <div
+              className="checkBoxOneSelectTwo"
+              style={{
+                backgroundColor: values.ischeckedGreen ? "green" : "transparent",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer"
+              }}
+              onClick={() => {
+                setFieldValue("ischeckedGreen", true);
+                setFieldValue("ischeckedBlue", false);
+              }}
+            ></div>
+          </div>
+        </Form>
+      )}
+    </Formik>
