@@ -1,3 +1,7 @@
+* {
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
   padding: 5rem 1rem;
@@ -98,7 +102,7 @@ button:disabled {
 }
 .parent {
   display: flex;
-  gap:30px;
+  gap: 30px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -107,18 +111,15 @@ button:disabled {
   height: 100px;
   margin: 0 auto;
   border-radius: 10px;
-
 }
 .checkBoxOneSelectOne {
   border: 1px solid rgb(0, 255, 17);
   border-radius: 100px;
   width: 25px;
   height: 25px;
-  
+
   padding: 0px 10px;
   margin-right: 10px;
-
- 
 }
 
 .checkBoxOneSelectOne:hover {
@@ -132,27 +133,52 @@ button:disabled {
   height: 25px;
   padding: 0px 10px;
   margin-right: 10px;
- 
 }
 .checkBoxOneSelectTwo:hover {
   cursor: pointer;
 }
-.parentContainer{
+.parentContainer {
   border: 1px solid rgb(0, 162, 255);
   height: 150px;
   width: 250px;
   border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 160, 105);
 }
 
-.roundBox{
+.roundBox {
   border: 1px solid lawngreen;
   height: 25px;
   width: 25px;
   border-radius: 25px;
   margin-left: -30px;
-
 }
 
-.roundBox:hover{
+.roundBox:hover {
   cursor: pointer;
+}
+.sliderParent {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border: 3px solid rgb(1, 173, 185);
+  height: 250px;
+  transition: all .5s ease-in-out;
+}
+
+.sliderChildren {
+  border: 2px solid seagreen;
+  width: 350px;
+  height: 200px;
+  border-radius: 15px;
+  box-shadow: 3px -3px 10px rgba(172, 255, 47, 0.815);
+  background-color: #8381fcde;
+}
+
+.arrow{
+font-size:50px;
+cursor: pointer;
 }
