@@ -7,10 +7,13 @@ function Slider() {
   const handleClickRight = () => {
     if (isMoving.current) {
       const currentPosition =
-        parseFloat(isMoving.current.style.marginLeft) || 0;  //
-        console.log(isMoving.current.style.marginLeft)
+        parseFloat(isMoving.current.style.marginLeft) || 0; //nothing at first
+
+
       const newPosition = currentPosition - 25; // Incrementally move by 25vw
-      isMoving.current.style.marginLeft = `${newPosition}vw`;
+      if (newPosition > -(sliderData.length * 25)) {
+        isMoving.current.style.marginLeft = `${newPosition}vw`;
+      }
     }
   };
   const handleClickLeft = () => {
@@ -18,7 +21,9 @@ function Slider() {
       const currentPosition =
         parseFloat(isMoving.current.style.marginLeft) || 0;
       const newPosition = currentPosition + 25; // Incrementally move by 25vw
-      isMoving.current.style.marginLeft = `${newPosition}vw`;
+      console.log(newPosition);
+      if(newPosition<0){
+      isMoving.current.style.marginLeft = `${newPosition}vw`;}
     }
   };
 
