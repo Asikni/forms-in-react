@@ -9,7 +9,6 @@ function Slider() {
       const currentPosition =
         parseFloat(isMoving.current.style.marginLeft) || 0; //nothing at first
 
-
       const newPosition = currentPosition - 25; // Incrementally move by 25vw
       if (newPosition > -(sliderData.length * 25)) {
         isMoving.current.style.marginLeft = `${newPosition}vw`;
@@ -22,8 +21,9 @@ function Slider() {
         parseFloat(isMoving.current.style.marginLeft) || 0;
       const newPosition = currentPosition + 25; // Incrementally move by 25vw
       console.log(newPosition);
-      if(newPosition<0){
-      isMoving.current.style.marginLeft = `${newPosition}vw`;}
+      if (newPosition < 0) {
+        isMoving.current.style.marginLeft = `${newPosition}vw`;
+      }
     }
   };
 
@@ -44,11 +44,11 @@ function Slider() {
           </div>
         ))}
       </div>
-      <div style={{ display: "flex", justifyContent: "center", gap: "40px" }}>
+      <div className="twoArrows"style={{ display: "flex", justifyContent:"space-between" }}>
         <div className="arrow" onClick={handleClickLeft}>
           &lt;
         </div>
-        <div className="arrow" onClick={handleClickRight}>
+        <div className="arrow" style={{left:"-100px"}}onClick={handleClickRight}>
           &gt;
         </div>
       </div>
