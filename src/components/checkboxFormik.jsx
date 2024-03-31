@@ -18,7 +18,7 @@ const Checkbox = () => {
       {(
         { setFieldValue, values } //values is a destructured object passed as a parameter to the render prop function provided to the Formik component. This object holds the current values of the form fields defined in initialValues.
       ) => (
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div style={{ display: "flex" }}>
             <div className="parentContainer"> This is checkbox One</div>
             <div
