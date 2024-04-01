@@ -4,7 +4,6 @@ import sliderData from "../components/sliderData";
 
 function Slider() {
   const sliderParentRef = useRef(null);
-  const sliderChildrenRef = useRef(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const touchStartX = useRef(null);
@@ -28,13 +27,13 @@ function Slider() {
       return;
     }
 
-    const touchMoveX = event.touches[0].clientX;
-    touchDeltaX.current = touchMoveX - touchStartX.current;
+    // const touchMoveX = event.touches[0].clientX;
+    // touchDeltaX.current = touchMoveX - touchStartX.current;
 
-    if (sliderChildrenRef.current) {
-      sliderChildrenRef.current.style.transition = "none";
-      sliderChildrenRef.current.style.transform = `translateX(${touchDeltaX.current}px)`;
-    }
+    // if (sliderParentRef.current) {
+    //   sliderParentRef.current.style.transition = "none";
+    //   sliderParentRef.current.style.transform = `translateX(${touchDeltaX.current}px)`;
+    // }
   };
 
   const handleTouchEnd = () => {
@@ -56,27 +55,27 @@ function Slider() {
   };
 
   const handleNextSlide = () => {
-    if (sliderChildrenRef.current) {
-      const sliderWidth = sliderChildrenRef.current.offsetWidth;
+    if (sliderParentRef.current) {
+      const sliderWidth = sliderParentRef.current.offsetWidth;
       const maxOffset = -(sliderData.length - 1) * sliderWidth;
       const newLeftOffset = Math.max(maxOffset, touchDeltaX.current);
-      sliderChildrenRef.current.style.transition = "transform 0.3s ease-in-out";
-      sliderChildrenRef.current.style.transform = `translateX(${newLeftOffset}px)`;
+      sliderParentRef.current.style.transition = "transform 0.3s ease-in-out";
+      sliderParentRef.current.style.transform = `translateX(${newLeftOffset}px)`;
     }
   };
 
   const handlePrevSlide = () => {
-    if (sliderChildrenRef.current) {
+    if (sliderParentRef.current) {
       const newLeftOffset = Math.min(0, touchDeltaX.current);
-      sliderChildrenRef.current.style.transition = "transform 0.3s ease-in-out";
-      sliderChildrenRef.current.style.transform = `translateX(${newLeftOffset}px)`;
+      sliderParentRef.current.style.transition = "transform 0.3s ease-in-out";
+      sliderParentRef.current.style.transform = `translateX(${newLeftOffset}px)`;
     }
   };
 
   const resetSliderPosition = () => {
-    if (sliderChildrenRef.current) {
-      sliderChildrenRef.current.style.transition = "transform 0.3s ease-in-out";
-      sliderChildrenRef.current.style.transform = `translateX(0)`;
+    if (sliderParentRef.current) {
+      sliderParentRef.current.style.transition = "transform 0.3s ease-in-out";
+      sliderParentRef.current.style.transform = `translateX(0)`;
     }
   };
 
@@ -89,35 +88,27 @@ function Slider() {
         onTouchMove={isTouchDevice ? handleTouchMove : undefined}
         onTouchEnd={isTouchDevice ? handleTouchEnd : undefined}
         style={{
-          overflowX: "hidden", // Hide overflow content
+          overflowX: "auto", // Allow scrolling if overflow
           width: "100%", // Ensure full width
+         
         }}
       >
-        <div
-          className="sliderChildren"
-          ref={sliderChildrenRef}
-          style={{
-            display: "flex",
-            flexDirection: "row", // Ensure children are displayed horizontally
-            transition: "transform 0.3s ease-in-out",
-          }}
-        >
-          {sliderData.map((data, index) => (
-            <div
-              key={index}
-              style={{
-                flex: "0 0 auto", // Prevent flex children from growing
-                width: "100%", // Ensure each slide takes full width
-              }}
-            >
-              <SliderComponent
-                name={data.Name}
-                place={data.Place}
-                contact={data.Contact}
-              />
-            </div>
-          ))}
-        </div>
+        {sliderData.map((data, index) => (
+          <div
+            key={index}
+            className="sliderChildren"
+            style={{
+              flex: "0 0 auto", // Prevent flex children from growing
+              width: "50%", // Ensure each slide takes full width
+            }}
+          >
+            <SliderComponent
+              name={data.Name}
+              place={data.Place}
+              contact={data.Contact}
+            />
+          </div>
+        ))}
       </div>
       {showMessage && (
         <div style={{ textAlign: "center", marginTop: "10px" }}>
