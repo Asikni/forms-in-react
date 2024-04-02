@@ -1,13 +1,16 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import { checkSchema } from "../schemas";
+import Items from "../schemas/itemSchema";
+import headings from "./headingsData";
 
 const Checkbox = () => {
+  const initialCheckValues = headings.map(() => false); // Create an array of false values based on the number of checkboxes
+
   return (
     <Formik
       initialValues={{
-        checkOne: false,
-        checkTwo: false,
+        checks: initialCheckValues,
       }}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
@@ -15,36 +18,14 @@ const Checkbox = () => {
       }}
       validationSchema={checkSchema}
     >
-      {(
-        { setFieldValue, values } //values is a destructured object passed as a parameter to the render prop function provided to the Formik component. This object holds the current values of the form fields defined in initialValues.
-      ) => (
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-          <div style={{ display: "flex" }}>
-            <div className="parentContainer"> This is checkbox One</div>
-            <div
-              className="roundBox"
-              style={{ backgroundColor: values.checkOne ? "green" : "" }}
-              onClick={() => {
-               
-           
-                // setFieldValue("checkOne", true);
-                setFieldValue("checkOne",!values.checkOne)
-                setFieldValue("checkTwo", false);
-              }}
-            ></div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <div className="parentContainer">  This is checkbox Two</div>
-            <div
-              className="roundBox"
-              style={{ backgroundColor: values.checkTwo ? "red" : "" }}
-              onClick={() => {
-                setFieldValue("checkTwo",!values.checkTwo)
-                setFieldValue("checkOne", false)
-                // console.log(values);
-              }}
-            ></div>
-          </div>
+      {({ setFieldValue, values }) => (  //values store initial form values in the form of an object ie values=initialValues
+        <div>
+
+          <Items
+            headings={headings}
+            values={values}
+            setFieldValue={setFieldValue}
+          />
         </div>
       )}
     </Formik>
