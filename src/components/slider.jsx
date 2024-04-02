@@ -1,10 +1,9 @@
 import SliderComponent from "../schemas/sliderSchema";
 import sliderData from "../components/sliderData";
 import { useRef } from "react";
-sliderData.length = 2;
 
 function Slider() {
-  const boxWidth = 25;
+  const boxWidth = 20;
   const isMoving = useRef(null);
   const handleClickRight = () => {
     if (isMoving.current) {
@@ -12,7 +11,7 @@ function Slider() {
         parseFloat(isMoving.current.style.marginLeft) || 0; //nothing at first
 
       const newPosition = currentPosition - boxWidth; // Incrementally move by 25vw
-      if (newPosition > -(sliderData.length * boxWidth)) {
+      if (newPosition > -(sliderData.length * boxWidth - 4 * boxWidth)) {
         isMoving.current.style.marginLeft = `${newPosition}vw`;
       }
     }
@@ -33,7 +32,9 @@ function Slider() {
     <div>
       <div
         className="sliderParent"
-        style={{ width: `${sliderData.length * boxWidth}vw` }}
+        style={{
+          width: `${sliderData.length * boxWidth}vw`,
+        }}
         ref={isMoving}
       >
         {sliderData.map((data) => (
@@ -46,10 +47,7 @@ function Slider() {
           </div>
         ))}
       </div>
-      <div
-        className="twoArrows"
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
+      <div className="twoArrows">
         <div className="arrow" onClick={handleClickLeft}>
           &lt;
         </div>
