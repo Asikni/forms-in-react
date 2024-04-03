@@ -10,6 +10,8 @@ import CheckBoxFormik from "./components/checkboxFormik";
 import CheckBoxFormik2 from "./components/checkboxFormik2";
 import Slider from "./components/slider";
 import Slider2 from "./components/slider2";
+import UploadImage from "./components/uploadImage";
+
 import "./App.css";
 
 function App() {
@@ -73,7 +75,12 @@ function App() {
         >
           Slider2
         </h3>
-
+        <h3
+          onClick={() => setView("Upload-Image")}
+          style={{ color: view === "Upload-Image" ? "#fff" : "" }}
+        >
+          Upload Image
+        </h3>
       </nav>
       {view === "basic" ? (
         <BasicForm />
@@ -85,13 +92,15 @@ function App() {
         <TagSelector />
       ) : view === "searchfilter2" ? (
         <TagSelector2 />
-      ) : view === "checkbox-formik" ?(
+      ) : view === "checkbox-formik" ? (
         <CheckBoxFormik />
-        ) : view === "checkbox-formik2" ?(
-          <CheckBoxFormik2 />
-      ):  view === "Slider" ?(
-      <Slider/>): <Slider2 /> 
-      }
+      ) : view === "checkbox-formik2" ? (
+        <CheckBoxFormik2 />
+      ) : view === "Slider" ? (
+        <Slider />
+      ) :  view === "Slider2" ?(
+        <Slider2 />
+      ) : <UploadImage/>}
     </div>
   );
 }

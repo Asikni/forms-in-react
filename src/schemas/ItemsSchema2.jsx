@@ -19,7 +19,7 @@ function Items2({ headings, values, setFieldValue }) {
               }}
               onClick={() => {
                 const updatedChecks = headings.map((_, idx) => {
-                  if (idx === index) {
+                  if (idx === index) {  //select one reject others
                     return true;
                   } else {
                     return false;
