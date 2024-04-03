@@ -7,6 +7,7 @@ import TagSelector from "./components/searchFilter";
 import TagSelector2 from "./components/searchFilter2";
 
 import CheckBoxFormik from "./components/checkboxFormik";
+import CheckBoxFormik2 from "./components/checkboxFormik2";
 import Slider from "./components/slider";
 import Slider2 from "./components/slider2";
 import "./App.css";
@@ -53,6 +54,12 @@ function App() {
         >
           Checkbox-formik
         </h3>
+        <h3
+          onClick={() => setView("checkbox-formik2")}
+          style={{ color: view === "checkbox-formik2" ? "#fff" : "" }}
+        >
+          Checkbox-formik2
+        </h3>
 
         <h3
           onClick={() => setView("Slider")}
@@ -66,6 +73,7 @@ function App() {
         >
           Slider2
         </h3>
+
       </nav>
       {view === "basic" ? (
         <BasicForm />
@@ -79,6 +87,8 @@ function App() {
         <TagSelector2 />
       ) : view === "checkbox-formik" ?(
         <CheckBoxFormik />
+        ) : view === "checkbox-formik2" ?(
+          <CheckBoxFormik2 />
       ):  view === "Slider" ?(
       <Slider/>): <Slider2 /> 
       }

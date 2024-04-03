@@ -1,0 +1,39 @@
+function Items2({ headings, values, setFieldValue }) {
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        {headings.map((heading, index) => (
+          <div
+            className="parentContainer"
+            key={index}
+            style={{
+              border: values.checks[index] ? "1px solid lightblue" : "",
+              boxShadow: values.checks[index] ? "5px 2px  " : "",
+            }}
+          >
+            {heading.heading}
+            <div
+              className="roundBox"
+              style={{
+                backgroundColor: values.checks[index] ? "red" : "", //remember values is an object
+              }}
+              onClick={() => {
+                const updatedChecks = headings.map((_, idx) => {
+                  if (idx === index) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                });
+
+                setFieldValue("checks", updatedChecks);
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Items2;

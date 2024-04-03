@@ -1,16 +1,16 @@
 import React from "react";
 import { Formik } from "formik";
 import { checkSchema } from "../schemas";
-import Items from "../schemas/itemSchema";
+import Items2 from "../schemas/ItemsSchema2";
 import headings from "./headingsData";
 
-const CheckBoxFormik = () => {
-  const initialCheckValues = headings.map(() => false); // Create an array of false values based on the number of checkboxes
+const CheckBoxFormik2 = () => {
+  const initialCheckValue = false // Create an array of false values based on the number of checkboxes
 
   return (
     <Formik
       initialValues={{
-        checks: initialCheckValues,
+        checks: initialCheckValue,
       }}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
@@ -18,10 +18,11 @@ const CheckBoxFormik = () => {
       }}
       validationSchema={checkSchema}
     >
-      {({ setFieldValue, values }) => (  //values store initial form values in the form of an object ie values=initialValues
+      {(
+        { setFieldValue, values } //values store initial form values in the form of an object ie values=initialValues
+      ) => (
         <div>
-
-          <Items
+          <Items2
             headings={headings}
             values={values}
             setFieldValue={setFieldValue}
@@ -32,4 +33,4 @@ const CheckBoxFormik = () => {
   );
 };
 
-export default CheckBoxFormik;
+export default CheckBoxFormik2;
