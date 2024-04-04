@@ -1,62 +1,80 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
-function UploadImage() {
-  const [files, setFiles] = useState(null);
-  const [progress, setProgress] = useState({ started: false, pc: 0 });
-  const [msg, setMsg] = useState(null);
+const UploadImage = () => {
+  const [file, setFile] = useState(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState(null);
+  const [fullSizeUrl, setFullSizeUrl] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState("");
+  const [response, setResponse] = useState("");
 
-  function handleUpload() {
-    if (!files) {
-      console.log("No file Selected");
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+
+    // Generate thumbnail URL
+    const reader = new FileReader();
+    reader.onload = () => {
+      setThumbnailUrl(reader.result);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
+
+  const handleUpload = () => {
+    if (!file) {
+      setUploadStatus("No file selected");
       return;
     }
-    const fd = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      fd.append(`file${i + 1}`, files[i]);
-    }
-    setMsg("Uploading....");
-    setProgress((prevState) => {
-      return { ...prevState, started: true };
-    });
+
+    setUploadStatus("Uploading...");
+    const formData = new FormData();
+    formData.append("file", file);
+
     axios
-      .post("http://httpbin.org/post", fd, {
-        onUploadProgress: (ProgressEvent) => {
-          setProgress((prevState) => {
-            return { ...prevState, pc: ProgressEvent.progress * 100 };
-          });
+      .post("https://mvp-lit-list.saibbyweb.com/uploadImage", formData, {
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setUploadProgress(progress);
         },
         headers: {
-          "Custom-Header": "value",
+          "Content-Type": "multipart/form-data",
         },
       })
-      .then((res) => {
-        setMsg("upload successfully");
-        console.log(res.data);
+      .then((response) => {
+        setUploadStatus("Upload successful");
+        setResponse(response.data.location);
+
+        // Extracting full-size image URL from the response
+        const imageUrl = response.data.url; // Change 'url' to the correct property name
+        const fullSizeUrl = URL.createObjectURL(file);
+        setFullSizeUrl(fullSizeUrl);
       })
-      .catch((err) => {
-        setMsg("Upload Failed");
-        console.error(err);
+      .catch((error) => {
+        setUploadStatus("Upload failed");
+        console.error(error);
       });
-  }
+  };
+
   return (
     <div>
-      <div className="App">
-        <h1>Uploading Files</h1>
-        <input
-          onChange={(e) => {
-            setFiles(e.target.files);
-          }}
-          type="file"
-          multiple
-        />
-        <button onClick={handleUpload}>Upload</button>
-        {progress.started && (
-          <progress max="100" value={progress.pc}></progress>
-        )}
-        {msg && <span> {msg}</span>}
-      </div>
+      <h1>Upload Image</h1>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
+      {uploadProgress > 0 && <progress value={uploadProgress} max="100" />}
+      <p>{uploadStatus}</p>
+      <Link to="https://www.google.com">Go to Google</Link>
+      {uploadStatus === "Uploading..." && thumbnailUrl && (
+        <img src={thumbnailUrl} alt="Thumbnail" style={{ maxWidth: "50px" }} />
+      )}
+      {uploadStatus === "Upload successful" && fullSizeUrl && (
+        <img src={fullSizeUrl} alt="Full Size" style={{ maxWidth: "300px" }} />
+      )}
     </div>
   );
-}
+};
+
 export default UploadImage;
