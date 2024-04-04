@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom'
 
 const UploadImage = () => {
   const [file, setFile] = useState(null);
-  const [thumbnailUrl, setThumbnailUrl] = useState(null);
-  const [fullSizeUrl, setFullSizeUrl] = useState(null);
+  const [displayImage, setdisplayImage] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState("");
-  const [response, setResponse] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
+    console.log(event.target.files[0]);
+    const selectedFile = event.target.files[0]; //select one file
     setFile(selectedFile);
 
     // Generate thumbnail URL
-    const reader = new FileReader();
+    const reader = new FileReader(); //FileReader is a built-in JavaScript object that allows you to read the contents of files asynchronously.
     reader.onload = () => {
-      setThumbnailUrl(reader.result);
+      setdisplayImage(reader.result); // The result property contains the data URL representing the file's contents.
     };
-    reader.readAsDataURL(selectedFile);
+    reader.readAsDataURL(selectedFile); // reads the contents of the specified File or Blob object and converts it to a data URL representing the file's data.
   };
 
   const handleUpload = () => {
@@ -29,33 +28,32 @@ const UploadImage = () => {
     }
 
     setUploadStatus("Uploading...");
-    const formData = new FormData();
+    const formData = new FormData(); // This object is used to collect the data that will be sent to the server.
     formData.append("file", file);
 
     axios
       .post("https://mvp-lit-list.saibbyweb.com/uploadImage", formData, {
         onUploadProgress: (progressEvent) => {
+          // option provided by Axios for handling upload progress events during file uploads.
+          //The progressEvent object contains information about the progress of the upload operation, such as the number of bytes that have
+          //been uploaded (loaded) and the total size of the file being uploaded (total).
           const progress = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
           setUploadProgress(progress);
         },
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
       })
       .then((response) => {
         setUploadStatus("Upload successful");
-        setResponse(response.data.location);
+        setImageUrl(response.data.location); //to get the url of the image
 
-        // Extracting full-size image URL from the response
-        const imageUrl = response.data.url; // Change 'url' to the correct property name
-        const fullSizeUrl = URL.createObjectURL(file);
-        setFullSizeUrl(fullSizeUrl);
       })
       .catch((error) => {
         setUploadStatus("Upload failed");
         console.error(error);
+      })
+      .finally(() => {
+        setUploadProgress(0);
       });
   };
 
@@ -65,13 +63,27 @@ const UploadImage = () => {
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
       {uploadProgress > 0 && <progress value={uploadProgress} max="100" />}
-      <p>{uploadStatus}</p>
-      <Link to="https://www.google.com">Go to Google</Link>
-      {uploadStatus === "Uploading..." && thumbnailUrl && (
-        <img src={thumbnailUrl} alt="Thumbnail" style={{ maxWidth: "50px" }} />
+      <p>
+        <div className="uploadStatus">{uploadStatus}</div>
+        {uploadStatus === "Uploading..." && displayImage && (
+          <img
+            src={displayImage}
+            alt="Thumbnail"
+            style={{ maxWidth: "50px" }}
+          />
+        )}
+      </p>
+
+      {{ imageUrl } ? (
+        <div>
+          <a href={`${imageUrl}`}>{imageUrl}</a>
+        </div>
+      ) : (
+        ""
       )}
-      {uploadStatus === "Upload successful" && fullSizeUrl && (
-        <img src={fullSizeUrl} alt="Full Size" style={{ maxWidth: "300px" }} />
+
+      {uploadStatus === "Upload successful" && displayImage && (
+        <img src={displayImage} alt="Full Size" style={{ maxWidth: "300px" }} />
       )}
     </div>
   );

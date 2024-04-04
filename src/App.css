@@ -176,8 +176,6 @@ button:disabled {
   transition: all 0.5s ease-in-out;
   position: relative;
   z-index: 0;
-
-
 }
 
 .sliderChildren {
@@ -211,6 +209,13 @@ button:disabled {
   bottom: 250px;
   color: #e9fc81;
 }
+a {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  color: rgb(20, 161, 154);
+}
+
 @media only screen and (max-width: 768px) {
   .sliderParent {
     width: 100% !important;
@@ -226,6 +231,4 @@ button:disabled {
   .twoArrows {
     display: none;
   }
-
-
 }
