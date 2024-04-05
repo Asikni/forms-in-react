@@ -13,41 +13,35 @@ const UploadImage = () => {
     setFullSizeUrls([]);
     setImageUrls([]);
     setUploadStatus(Array.from({ length: files.length }));
-    setThumbnails([]);
     const selectedFiles = event.target.files;
     const selectedThumbnails = [];
 
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
       const reader = new FileReader();
-
       reader.onload = () => {
         selectedThumbnails.push(reader.result);
-        setThumbnails([...thumbnails, ...selectedThumbnails]);
+        setThumbnails([...selectedThumbnails]);
       };
-
       reader.readAsDataURL(file);
     }
 
-    setFiles([...files, ...selectedFiles]);
+    setFiles([...selectedFiles]);
   };
 
   const handleUpload = () => {
     if (!files) {
       setUploadStatus(["No file selected"]);
-
       return;
     }
 
     const uploadPromises = [];
+    setUploadStatus(Array.from({ length: files.length }).fill("Uploading..."));
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const formData = new FormData();
-      setUploadStatus(["Uploading..."]);
-
       formData.append("file", file);
-
       uploadPromises.push(
         axios.post("https://mvp-lit-list.saibbyweb.com/uploadImage", formData, {
           onUploadProgress: (progressEvent) => {
@@ -67,7 +61,6 @@ const UploadImage = () => {
         setUploadStatus(
           Array.from({ length: files.length }).fill("Upload successful")
         );
-
         // Extracting full-size image URLs from the responses
         const fullSizeUrls = files.map((file, index) =>
           URL.createObjectURL(file)
@@ -91,17 +84,16 @@ const UploadImage = () => {
       <input type="file" onChange={handleFileChange} multiple />
       <button onClick={handleUpload}>Upload</button>
       {uploadProgress > 0 && <progress value={uploadProgress} max="100" />}
-
       {thumbnails.map((thumbnail, index) => (
         <div key={index}>
-          {uploadStatus[index] === "Uploading..." && ( // Conditionally render thumbnail if upload status is "Uploading..."
+          {uploadStatus[index] && <p>{uploadStatus[index]}</p>}
+          {uploadStatus[index] === "Uploading..." && (
             <img
               src={thumbnail}
               alt={`Thumbnail ${index}`}
               style={{ maxWidth: "50px" }}
             />
           )}
-          {uploadStatus[index] && <p>{uploadStatus[index]}</p>}
           {imageUrls[index] && (
             <div>
               <a href={imageUrls[index]}>{imageUrls[index]}</a>
