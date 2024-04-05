@@ -30,7 +30,7 @@ const UploadImage = () => {
   };
 
   const handleUpload = () => {
-    if (!files) {
+    if (files.length === 0) {
       setUploadStatus(["No file selected"]);
       return;
     }

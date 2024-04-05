@@ -11,6 +11,7 @@ const CheckBoxFormik2 = () => {
     <Formik
       initialValues={{
         checks: initialCheckValue,
+        selection: ""
       }}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
@@ -26,6 +27,7 @@ const CheckBoxFormik2 = () => {
             headings={headings}
             values={values}
             setFieldValue={setFieldValue}
+            value={values.selection}
           />
         </div>
       )}
