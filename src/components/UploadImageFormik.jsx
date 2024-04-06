@@ -14,7 +14,7 @@ const UploadImageFormik = () => {
           uploadProgress: 0,
           uploadStatus: "",
           imageUrl: "",
-          selectedUrl:"https://mvp-lit-list-dev.s3.eu-west-2.amazonaws.com/og/78e1c9a894ec9dc651387fce1bfe949b.jpg"
+          selectedUrl:"https://mvp-lit-list-dev.s3.eu-west-2.amazonaws.com/og/78e1c9a894ec9dc651387fce1bfe949b.jpg"// this is remote url
         }}
         onSubmit={async (values, { setFieldValue }) => {
           const { file } = values;
