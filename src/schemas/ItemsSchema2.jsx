@@ -1,4 +1,4 @@
-function Items2({ headings, values, setFieldValue, value }) {
+function Items2({ headings, setFieldValue, value }) {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>

@@ -5,13 +5,13 @@ import Items2 from "../schemas/ItemsSchema2";
 import headings from "./headingsData";
 
 const CheckBoxFormik2 = () => {
-  const initialCheckValue = false // Create an array of false values based on the number of checkboxes
+ 
 
   return (
     <Formik
       initialValues={{
-        checks: initialCheckValue,
-        selection: ""
+     
+        selection: " Job 1",
       }}
       onSubmit={async (values) => {
         await new Promise((r) => setTimeout(r, 500));
@@ -25,7 +25,7 @@ const CheckBoxFormik2 = () => {
         <div>
           <Items2
             headings={headings}
-            values={values}
+         
             setFieldValue={setFieldValue}
             value={values.selection}
           />
