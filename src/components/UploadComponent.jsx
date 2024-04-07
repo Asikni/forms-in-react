@@ -31,11 +31,7 @@ function Upload({ setFieldValue, values, value }) {
           />
         )}
         {value && (
-          <img
-            src={value}
-            alt="Thumbnail"
-            style={{ maxWidth: "50px" }}
-          />
+          <img src={value} alt="Thumbnail" style={{ maxWidth: "50px" }} />
         )}
       </p>
 

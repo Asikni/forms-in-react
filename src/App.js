@@ -13,6 +13,8 @@ import Slider2 from "./components/slider2";
 import UploadImage from "./components/uploadImage";
 import View from "./components/viewComponent";
 import UploadImageFormik from "./components/UploadImageFormik";
+import ThemeUsingProps from "./components/ThemeUsingProps";
+import ThemeUsingContext from "./components/ThemeUsingConText";
 import "./App.css";
 
 function App() {
@@ -83,9 +85,21 @@ function App() {
         </View>
         <View
           onclick={() => setView("Upload-Image2")}
-          style={{ color: view === "Upload Image2" ? "#fff" : "" }}
+          style={{ color: view === "Upload-Image2" ? "#fff" : "" }}
         >
           Image Uploader Formik
+        </View>
+        <View
+          onclick={() => setView("themeswitchprops")}
+          style={{ color: view === "themeswitchprops" ? "#fff" : "" }}
+        >
+          Theme Switch Using Props
+        </View>
+        <View
+          onclick={() => setView("themeswitchcontext")}
+          style={{ color: view === "themeswitchcontext" ? "#fff" : "" }}
+        >
+          Theme Swich Using context
         </View>
       </nav>
       {view === "basic" ? (
@@ -108,8 +122,12 @@ function App() {
         <Slider2 />
       ) : view === "Upload-Image" ? (
         <UploadImage />
-      ) : (
+      ) : view === "Upload-Image2" ? (
         <UploadImageFormik />
+      ) : view === "themeswitchprops" ? (
+        <ThemeUsingProps />
+      ) : (
+        <ThemeUsingContext />
       )}
     </div>
   );
