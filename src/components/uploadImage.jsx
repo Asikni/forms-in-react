@@ -33,7 +33,7 @@ const UploadImage = () => {
     //So reader.result depends on what readasdataurl takes as input
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!file) {
       setUploadStatus("No file selected");
       return;
@@ -43,7 +43,7 @@ const UploadImage = () => {
     const formData = new FormData(); // This object is used to collect the data that will be sent to the server.
     formData.append("file", file);
 
-    axios
+    await axios
       .post("https://mvp-lit-list.saibbyweb.com/uploadImage", formData, {
         //The reason for performing a POST request to upload a file is to transfer the file data from the client-side
         //environment to a server-side endpoint. While you have access to the file data locally in the client-side environment, it's typically necessary to upload the file to a server for various reasons:
