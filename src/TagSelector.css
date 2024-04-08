@@ -1,43 +1,45 @@
-.tag-selector{
-   
-    display: flex;
-    border: 1px solid rgb(64, 64, 239);
-    border-radius: 10px;
-    height: 50px;
+.tag-selector {
+  display: flex;
+  border: 1px solid rgb(64, 64, 239);
+  border-radius: 10px;
+  height: 50px;
+
+
+.tag-list {
+  display: flex;
+  /* border: 1px solid red; */
+  background: #1a202c;
+ 
+}
+  margin: 0px 8px;
 }
 
-.tag-list{
-   
-    display: flex;
-    /* border: 1px solid red; */
-    background: #1a202c;
+.tag {
+  display: flex;
+  align-items: center;
 
-    margin: 0px 8px;
-    
+  overflow: hidden;
+  width: fit-content;
+ 
 }
+.individualTag {
+  padding: 0px 15px 0px 10px;
 
-.tag{
-   
-    display: flex;
-    justify-content: center;
-    align-items: first baseline;
-    gap:5px;
-   
 }
-
-.crossButton{
-    color: white;
-    background-color: red;
-    border-radius: 30px;
-    height: 15px;
-    width: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.crossButton {
+  color: white;
+  background-color: red;
+  border-radius: 30px;
+  height: 15px;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 25px;
 }
 
 input[type="text"],
-
 textarea {
   background-color: transparent;
   border: none;

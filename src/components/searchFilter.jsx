@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../TagSelector.css";
-
+import Button from "./Button";
 function TagSelector() {
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState([]);
@@ -28,13 +28,13 @@ function TagSelector() {
       <div className="tag-list">
         {tags.map((tag, index) => (
           <div key={index} className="tag">
-            <span>{tag}</span>
-            <button
-              className="crossButton"
-              onClick={() => handleTagRemove(tag)}
+            <div className="individualTag">{tag}</div>
+            <Button
+              classname="crossButton"
+              onclick={() => handleTagRemove(tag)}
             >
               &times;
-            </button>
+            </Button>
           </div>
         ))}
       </div>
