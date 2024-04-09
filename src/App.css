@@ -216,6 +216,32 @@ a {
   color: rgb(20, 161, 154);
 }
 
+.mainCommentSection{
+  height: 100px;
+
+
+}
+
+
+.subCommentSection{
+  height: 50px;
+  width: 250px;
+
+}
+
+.postButtonMain{
+  width: 100px;
+  border: 1px solid rgb(255, 1, 1);
+  margin: 10px auto;
+  
+}
+
+.replyButton{
+  width: 80px;
+  border: 2px solid white;
+  margin: 10px 250px;
+}
+
 @media only screen and (max-width: 768px) {
   .sliderParent {
     width: 100% !important;

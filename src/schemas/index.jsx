@@ -41,3 +41,6 @@ export const checkSchema = yup.object().shape({
   checkOne: yup.boolean().oneOf([true, false]),
   checkTwo: yup.boolean().oneOf([true, false]),
 });
+export const commentSchema = yup.object().shape({
+  username: yup.string(), //if we put it as number and write text then it'll show error...but we can write text then
+});

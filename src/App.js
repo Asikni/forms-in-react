@@ -15,6 +15,7 @@ import View from "./components/viewComponent";
 import UploadImageFormik from "./components/UploadImageFormik";
 import ThemeUsingProps from "./components/ThemeUsingProps";
 import ThemeUsingContext from "./components/ThemeUsingConText";
+import CommentSection from "./components/CommentSection";
 import "./App.css";
 
 function App() {
@@ -101,6 +102,12 @@ function App() {
         >
           Theme Swich Using context
         </View>
+        <View
+          onclick={() => setView("commentSection")}
+          style={{ color: view === "commentSection" ? "#fff" : "" }}
+        >
+          Comments Section
+        </View>
       </nav>
       {view === "basic" ? (
         <BasicForm />
@@ -126,9 +133,9 @@ function App() {
         <UploadImageFormik />
       ) : view === "themeswitchprops" ? (
         <ThemeUsingProps />
-      ) : (
+      )  : view === "themeswitchcontext" ? (
         <ThemeUsingContext />
-      )}
+      ) : <CommentSection />}
     </div>
   );
 }
