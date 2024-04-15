@@ -44,6 +44,7 @@ function TagSelector() {
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleInputKeyPress}
+        style={{ border: "none" }}
       />
     </div>
   );

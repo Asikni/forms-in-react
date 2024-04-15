@@ -55,7 +55,7 @@ const CommentSection = () => {
               label=""
               name="comment"
               type="text"
-              placeholder="Your Comment"
+              placeholder="Reply"
             />
 
             <Button
