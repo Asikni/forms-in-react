@@ -64,3 +64,23 @@ function Slider() {
 }
 
 export default Slider;
+
+
+  // const maxPosition = -(NewsImages.length * boxWidth - 2 * boxWidth);
+  // const minPosition = 0;
+
+  // const moveRight = () => {
+  //   setCurrentIndex((prevIndex) => {
+  //     const newIndex = Math.min(prevIndex + 1, NewsImages.length - 1);
+  //     setSliderPosition(-newIndex * boxWidth);
+  //     return newIndex;
+  //   });
+  // };
+
+  // const moveLeft = () => {
+  //   setCurrentIndex((prevIndex) => {
+  //     const newIndex = Math.max(prevIndex - 1, 0);
+  //     setSliderPosition(-newIndex * boxWidth);
+  //     return newIndex;
+  //   });
+  // };
